@@ -41,8 +41,3 @@ datos_limpios %>%
             cex = 3) + 
   scale_fill_brewer(palette="Set1") # Extra: puedo elegir paleta de colores
 
-
-
-
-
-
