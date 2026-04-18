@@ -12,34 +12,48 @@ datos_limpios <- datos %>%
     -ISO3, -Country, -tipo_academia_en, -tipo_privado_en
   )
 
-# Renombrar columnas
-colnames(datos_limpios) <- c("Ranking","Pais","GIRAI_region","NU_region",
-                             "NU_subregion","GIRAI", 
-                             "Marcos_normativos_gubernamentales",
-                             "Acciones_gubernamentales","Actores_no_estatales",
-                             "Derechos_humanos","Gobernanza_IA",
-                             "Capacidades_IA",
-                             "Marcos_normativos_fuentes_secundarias",
-                             "Acciones_gubernamentales_fuentes_secundarias",
-                             "Actores_no_estatales_fuentes_secundarias",
-                             "Dimesion_mejor_puntuada",
-                             "Sesgo_y_discriminacion", "Derechos_infancia",
-                             "Diversidad_culturtal_y_linguistica",
-                             "Proteccion_de_datos_y_privacidad",
-                             "Igualdad_de_genero", "Supervision_humana",
-                             "Proteccion_laboral_y_derecho_al_trabajo",
-                             "Seguridad_precision_y_fiabilidad",
-                             "Transparencia_y_explicabilidad",
-                             "Cantidad_de_areas_reglas_estrategias_IA",
-                             "Cantidad_de_areas_acciones_gubernamientales_IA",
-                             "Cantidad_de_areas_discusiones_parlamentarias_IA",
-                             "Cantidad_de_areas_concientizacion_publica_IA",
-                             "Cantidad_de_areas_trabajo_actores_no_estatales_IA",
-                             "Hay_academias_trabajando",
-                             "Tipo_iniciativa_academia",
-                             "Hay_sector_privado_trabajando",
-                             "Tipo_iniciativa_sector_privado")
+colnames(datos_limpios) <- c(
+  "Ranking", "Pais", "GIRAI_region", "NU_region", "NU_subregion", "GIRAI",
+  "Marcos_normativos_gob", "Acciones_gob", "Actores_no_estatales",
+  "Derechos_humanos", "Gobernanza_IA", "Capacidades_IA",
+  "Marcos_fuentes_secundarias", "Acciones_fuentes_secundarias",
+  "Actores_no_estatales_secundarias", "Dimension_mejor_puntuada",
+  "Sesgo_y_discriminacion", "Derechos_infancia",
+  "Diversidad_cultural_y_linguistica", "Proteccion_datos_y_privacidad",
+  "Igualdad_de_genero", "Supervision_humana",
+  "Proteccion_laboral_y_trabajo", "Seguridad_precision_y_fiabilidad",
+  "Transparencia_y_explicabilidad", "Cant_areas_reglas_IA",
+  "Cant_areas_acciones_gob_IA", "Cant_areas_discusiones_IA",
+  "Cant_areas_concientizacion_IA", "Cant_areas_trabajo_nsa_IA",
+  "Hay_academias_trabajando", "Tipo_iniciativa_academia",
+  "Hay_sector_privado_trabajando", "Tipo_iniciativa_sector_privado"
+)
 
-# HASTA ACA LABURE LURATI GAY--------------------------------------------------
-#bueno
-
+# Creación de variable de respuesta múltiple y limpieza de p70
+datos_limpios <- datos_limpios %>%
+  rowwise() %>%
+  mutate(
+    Areas_p70_multiple = {
+      v <- c(
+        if (Sesgo_y_discriminacion == 1) "Sesgo",
+        if (Derechos_infancia == 1) "Infancia",
+        if (Diversidad_cultural_y_linguistica == 1) "Diversidad",
+        if (Proteccion_datos_y_privacidad == 1) "Datos",
+        if (Igualdad_de_genero == 1) "Género",
+        if (Supervision_humana == 1) "Supervisión",
+        if (Proteccion_laboral_y_trabajo == 1) "Laboral",
+        if (Seguridad_precision_y_fiabilidad == 1) "Seguridad",
+        if (Transparencia_y_explicabilidad == 1) "Transparencia"
+      )
+      if (length(v) == 0) "Ninguna" else paste(v, collapse = ", ")
+    }
+  ) %>%
+  ungroup() %>%
+  # Elimino las columnas de indicadores p70
+  select(
+    -Sesgo_y_discriminacion, -Derechos_infancia,
+    -Diversidad_cultural_y_linguistica, -Proteccion_datos_y_privacidad,
+    -Igualdad_de_genero, -Supervision_humana,
+    -Proteccion_laboral_y_trabajo, -Seguridad_precision_y_fiabilidad,
+    -Transparencia_y_explicabilidad
+  )
