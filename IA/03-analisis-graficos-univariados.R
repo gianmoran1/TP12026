@@ -36,9 +36,7 @@ top_10 %>%
   theme(axis.text.x = element_text(angle = 45, hjust = 1))
 
 
-##HACER ESTO POR REGION
+#gian puto.
 
-# datos_limpios %>% group_by(especie) %>%
-#summarize(altura_media = mean(altura),
-          #altura_ds = sd(altura))
+
 
