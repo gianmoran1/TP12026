@@ -34,7 +34,7 @@ datos_limpios %>%
   geom_bar(stat="identity", color="white") + 
   coord_polar("y", start=0) + # Se transforman las frecuencias a coordenadas polares
   labs(fill = "") +
-  ggtitle("Dimension mejor puntuada") +
+  ggtitle("Dimensión mejor puntuada") +
   theme_void() + # Quito elementos gráficos no deseados
   geom_text(aes(label = percent), # Agrego etiquetas
             position = position_stack(vjust = 0.5),
