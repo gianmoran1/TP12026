@@ -98,5 +98,5 @@ datos_limpios %>%
   geom_text(aes(label = percent), # Agrego etiquetas
             position = position_stack(vjust = 0.5),
             cex = 3) + 
-  scale_fill_brewer(palette="Set1") # Extra: puedo elegir paleta de colores a
+  scale_fill_brewer(palette="Set1") # Extra: puedo elegir paleta de colores aa
 
