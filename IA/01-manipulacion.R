@@ -7,13 +7,12 @@ library(tidyverse)
 # Fijo el dataset
 attach(datos)
 
-# Opcion 1
-datos_analisis1 <- datos %>%
-  select(   # Seleccionar las columnas que quiero conservar
-    Ranking, Pais, GIRAI_region, NU_region, UN_subregion
-  )
-
-# Lo que sigue es script de la catedra-----------------------------------------
+######################
+# Renombrar columnas #
+######################
+colnames(datos) <- c("id","altura","diametro","inclinacion","edad","tiempo",
+                     "brotes","especie","follaje","origen","atracnosis",
+                     "roya","manchas","ampollas")
 
 ###################
 # Modificar datos #
