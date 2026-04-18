@@ -1,10 +1,12 @@
 # Instalo los paquetes necesarios (si aún no los tengo instalados)
 # install.packages("tidyverse")
 # install.packages("ggplot2")
+# install.packages("janitor")
 
 # Cargo los paquetes que voy a usar
 library(tidyverse)
 library(ggplot2)
+library(janitor)
 
 # Fijo el dataset
 attach(datos_limpios)

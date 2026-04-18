@@ -8,3 +8,5 @@ url = "https://docs.google.com/spreadsheets/d/1Kwl4KByOv8q2kXMsgaO3d5QI3vUQ40RCZ
 gs4_deauth()
 datos <- read_sheet(url, sheet = 2, skip = 1)
 str(datos)
+
+
