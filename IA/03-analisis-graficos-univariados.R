@@ -7,8 +7,6 @@ library(tidyverse)
 library(ggplot2)
 
 # Fijo el dataset
-
-# Fijo el dataset
 attach(datos)
 
 #####################
