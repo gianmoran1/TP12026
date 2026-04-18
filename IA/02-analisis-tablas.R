@@ -37,4 +37,4 @@ datos_limpios %>% group_by(NU_subregion) %>%
             ag_media = mean(Acciones_gubernamentales),
             ane_media = mean(Actores_no_estatales))      
 
-
+#fin cambios tero
