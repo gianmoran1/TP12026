@@ -7,17 +7,22 @@ library(tidyverse)
 
 
 # Fijo el dataset
-attach(datos)
+attach(datos_limpios)
 
 
 
 
 datos_limpios %>% group_by(NU_region) %>%
   summarize(GIRAI_media = mean(GIRAI),
-  region_ds = sd(GIRAI))
+            GIRAI_maximo = max(GIRAI),
+            GIRAI_minimo = min(GIRAI),
+            GIRAI_ds = sd(GIRAI))
 
 
 
 datos_limpios %>% group_by(NU_subregion) %>%
   summarize(GIRAI_media = mean(GIRAI),
-            region_ds = sd(GIRAI))
+            GIRAI_maximo = max(GIRAI),
+            GIRAI_minimo = min(GIRAI),
+            GIRAI_ds = sd(GIRAI))
+
