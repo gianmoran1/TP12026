@@ -27,14 +27,14 @@ datos_limpios %>% group_by(NU_subregion) %>%
             GIRAI_ds = sd(GIRAI))
 
 datos_limpios %>% group_by(NU_region) %>%
-  summarize(mng_media = mean(Marcos_normativos_gubernamentales),
-            ag_media = mean(Acciones_gubernamentales),
+  summarize(mng_media = mean(Marcos_normativos_gob),
+            ag_media = mean(Acciones_gob),
             ane_media = mean(Actores_no_estatales))
 
 
 datos_limpios %>% group_by(NU_subregion) %>%
-  summarize(mng_media = mean(Marcos_normativos_gubernamentales),
-            ag_media = mean(Acciones_gubernamentales),
+  summarize(mng_media = mean(Marcos_normativos_gob),
+            ag_media = mean(Acciones_gob),
             ane_media = mean(Actores_no_estatales))      
 
-#fin cambios teroo
+#fin cambios teroooo
