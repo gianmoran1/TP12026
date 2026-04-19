@@ -96,3 +96,41 @@ datos_limpios %>%
             position = position_stack(vjust = 0.5),
             cex = 3) + 
   scale_fill_brewer(palette="Set1") # Extra: puedo elegir paleta de colores
+
+# Grafico variable categorica de respuesta multiple
+
+datos_limpios %>%
+  separate_rows(Areas_p70_multiple, sep = ", ") %>%
+  filter(Areas_p70_multiple != "Ninguna") %>%
+  count(Areas_p70_multiple) %>%
+  ggplot() +
+  aes(x = reorder(Areas_p70_multiple, n), y = n) +
+  geom_bar(stat = "identity", fill = "steelblue", col = "black") +
+  coord_flip() +
+  labs(
+    title = "Áreas con desempeño destacado (>70 puntos)",
+    x = "Área Temática",
+    y = "Cantidad de Países"
+  ) +
+  theme_minimal()
+
+#-----------------------------------------------------------------------------
+
+# Definir la ordinalidad de la variable de fuentes secundarias [cite: 161]
+datos_limpios$Marcos_fuentes_secundarias <- factor(
+  datos_limpios$Marcos_fuentes_secundarias,
+  levels = c("Muy bajo", "Bajo", "Medio", "Alto", "Muy alto")
+)
+
+# Gráfico de relación Categórica vs Cuantitativa (Sin puntos)
+datos_limpios %>%
+  ggplot() +
+  aes(x = Marcos_fuentes_secundarias, y = Cant_areas_reglas_IA) +
+  # El boxplot muestra la distribución de áreas reguladas [cite: 164]
+  geom_boxplot(fill = "lightblue", outlier.color = "red") +
+  labs(
+    title = "Relación entre desarrollo percibido y regulación efectiva",
+    x = "Nivel de desarrollo (Fuentes secundarias)",
+    y = "Cantidad de áreas con marcos normativos"
+  ) +
+  theme_minimal()
