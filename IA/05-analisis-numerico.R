@@ -61,6 +61,7 @@ tabla_resumen <- datos_limpios %>%
 
 print(tabla_resumen)
             
+#tero
 
 # Distribuciones condicionales
 #tabyl(datos_limpios, tiempo, follaje) %>%
