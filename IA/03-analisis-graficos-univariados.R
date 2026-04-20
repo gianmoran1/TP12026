@@ -13,7 +13,7 @@ library(gridExtra)
 # Fijo el dataset
 attach(datos_limpios)
 
-# Gráfico de barras top 10 GIRAI-----------------------------------------------
+# Gráfico de barras top 10 GIRAI----------POSIBLE VUELE A LA MIERDA COMO EL TERO-------------------------------------
 
 top_10 <- datos_limpios[order(datos$Ranking), ][1:10, ]
 
@@ -31,50 +31,50 @@ top_10 %>%
 # Boxplot GIRAI en regiones----------------------------------------------------
 
 # Creamos los gráficos de a uno y los guardamos en objetos (g1, ..., g5)
-g1 <- datos_limpios %>% filter(NU_region == "América") %>%
+g2 <- datos_limpios %>% filter(NU_region == "América") %>%
+  ggplot() +
+  aes(x = NU_region, y = GIRAI) +
+  geom_boxplot(show.legend = F, fill = "orange") +
+  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 0)) +
+  labs(x = "", y = "") 
+
+g3 <- datos_limpios %>% filter(NU_region == "Asia") %>%
+  ggplot() +
+  aes(x = NU_region, y = GIRAI) +
+  geom_boxplot(show.legend = F, fill = "orange") +
+  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 0)) +
+  labs(x = "", y = "") 
+
+
+g4 <- datos_limpios %>% filter(NU_region == "Europa") %>%
+  ggplot() +
+  aes(x = NU_region, y = GIRAI) +
+  geom_boxplot(show.legend = F, fill = "orange") +
+  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 0)) +
+  labs(x = "", y = "") 
+
+g5 <- datos_limpios %>% filter(NU_region == "Oceanía") %>%
+  ggplot() +
+  aes(x = NU_region, y = GIRAI) +
+  geom_boxplot(show.legend = F, fill = "orange") +
+  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
+  theme_minimal() +
+  theme(axis.text.y = element_text(size = 0)) +
+  labs(x = "", y = "") 
+
+g1 <- datos_limpios %>% filter(NU_region == "África") %>%
   ggplot() +
   aes(x = NU_region, y = GIRAI) +
   geom_boxplot(show.legend = F, fill = "orange") +
   scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
   theme_minimal() +
   labs(x = "", y = "GIRAI") # Le dejo el nombre del eje solo al primero
-
-g2 <- datos_limpios %>% filter(NU_region == "Asia") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
-
-
-g3 <- datos_limpios %>% filter(NU_region == "Europa") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
-
-g4 <- datos_limpios %>% filter(NU_region == "Oceanía") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
-
-g5 <- datos_limpios %>% filter(NU_region == "África") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
 
 # Con la función grid arrange armo la grilla para "imprimir"
 grid.arrange(g1, g2, g3, g4, g5, # Qué objetos vamos a mostrar
