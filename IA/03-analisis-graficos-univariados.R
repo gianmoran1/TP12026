@@ -138,7 +138,7 @@ datos_limpios %>%
 
 ##############
 # Histograma #
-##############
+############## tero
 
 # Frecuencias absolutas
 ggplot(datos_limpios) +
