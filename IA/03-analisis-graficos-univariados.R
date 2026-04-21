@@ -13,72 +13,8 @@ library(gridExtra)
 # Fijo el dataset
 attach(datos_limpios)
 
-# Gráfico de barras top 10 GIRAI----------POSIBLE VUELE A LA MIERDA COMO EL TERO-------------------------------------
-
-top_10 <- datos_limpios[order(datos$Ranking), ][1:10, ]
-
-top_10 %>%
-  ggplot() + 
-  aes(x = reorder(Pais, -GIRAI), y = GIRAI) + 
-  geom_bar(width = 0.75,   # Ancho de barras 
-           fill = '#7ed021',  # Color 
-           col = 'black',     # Borde 
-           stat = "identity") + # Agregado necesario porque ya tenemos el valor calculado
-  labs(x = "País", y = "Valor GIRAI") +
-  theme_classic() +
-  theme(axis.text.x = element_text(angle = 45, hjust = 1))
-
-# Boxplot GIRAI en regiones----------------------------------------------------
-
-# Creamos los gráficos de a uno y los guardamos en objetos (g1, ..., g5)
-g2 <- datos_limpios %>% filter(NU_region == "América") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
-
-g3 <- datos_limpios %>% filter(NU_region == "Asia") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
 
 
-g4 <- datos_limpios %>% filter(NU_region == "Europa") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
-
-g5 <- datos_limpios %>% filter(NU_region == "Oceanía") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  theme(axis.text.y = element_text(size = 0)) +
-  labs(x = "", y = "") 
-
-g1 <- datos_limpios %>% filter(NU_region == "África") %>%
-  ggplot() +
-  aes(x = NU_region, y = GIRAI) +
-  geom_boxplot(show.legend = F, fill = "orange") +
-  scale_y_continuous(limits = c(0,90)) + # Fijo límites para el eje continuo
-  theme_minimal() +
-  labs(x = "", y = "GIRAI") # Le dejo el nombre del eje solo al primero
-
-# Con la función grid arrange armo la grilla para "imprimir"
-grid.arrange(g1, g2, g3, g4, g5, # Qué objetos vamos a mostrar
-             ncol=5, nrow =1) # Cant de columnas y filas de la grilla
 
 # Grafico de sectores circulares con las dimensiones mejor puntuadas-----------
 
@@ -97,7 +33,7 @@ datos_limpios %>%
             cex = 3) + 
   scale_fill_brewer(palette="Set1") # Extra: puedo elegir paleta de colores
 
-# Grafico variable categorica de respuesta multiple
+# Grafico areas con mas de 70 puntos
 
 datos_limpios %>%
   separate_rows(Areas_p70_multiple, sep = ", ") %>%
@@ -122,25 +58,13 @@ datos_limpios$Marcos_fuentes_secundarias <- factor(
   levels = c("Muy bajo", "Bajo", "Medio", "Alto", "Muy alto")
 )
 
-# Gráfico de relación Categórica vs Cuantitativa (Sin puntos)
-datos_limpios %>%
-  ggplot() +
-  aes(x = Marcos_fuentes_secundarias, y = Cant_areas_reglas_IA) +
-  # El boxplot muestra la distribución de áreas reguladas [cite: 164]
-  geom_boxplot(fill = "lightblue", outlier.color = "red") +
-  labs(
-    title = "Relación entre desarrollo percibido y regulación efectiva",
-    x = "Nivel de desarrollo (Fuentes secundarias)",
-    y = "Cantidad de áreas con marcos normativos"
-  ) +
-  theme_minimal()
 
 
 ##############
 # Histograma #
-############## tero
+############## 
 
-# Frecuencias absolutas
+# histograma de Frecuencias absolutas del GIRAI
 ggplot(datos_limpios) +
   aes(x = GIRAI) +
   geom_histogram(fill = "lightgray", col = "black", 
