@@ -50,7 +50,7 @@ g3 <- datos_limpios %>% filter(NU_region == "Asia") %>%
   labs(x = "", y = "") 
 
 
-g4 <- datos_limpios %>% filter(NU_regionw == "Europa") %>%
+g4 <- datos_limpios %>% filter(NU_region == "Europa") %>%
   ggplot() +
   aes(x = NU_region, y = GIRAI) +
   geom_boxplot(show.legend = F, fill = "orange") +
@@ -134,3 +134,19 @@ datos_limpios %>%
     y = "Cantidad de áreas con marcos normativos"
   ) +
   theme_minimal()
+
+
+##############
+# Histograma #
+##############
+
+# Frecuencias absolutas
+ggplot(datos_limpios) +
+  aes(x = GIRAI) +
+  geom_histogram(fill = "lightgray", col = "black", 
+                 
+                 breaks = seq(0, 100, 5)) + # Límites de intervalos
+  
+  scale_x_continuous(breaks = seq(0, 250, 20)) + #Marcas del eje
+  
+  labs(x = "Puntos GIRAI", y = "Cantidad de países")
