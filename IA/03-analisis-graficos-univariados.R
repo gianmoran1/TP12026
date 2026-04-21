@@ -50,7 +50,7 @@ g3 <- datos_limpios %>% filter(NU_region == "Asia") %>%
   labs(x = "", y = "") 
 
 
-g4 <- datos_limpios %>% filter(NU_region == "Europa") %>%
+g4 <- datos_limpios %>% filter(NU_regionw == "Europa") %>%
   ggplot() +
   aes(x = NU_region, y = GIRAI) +
   geom_boxplot(show.legend = F, fill = "orange") +
