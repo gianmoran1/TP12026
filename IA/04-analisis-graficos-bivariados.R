@@ -122,20 +122,57 @@ datos_limpios %>%
   # El boxplot muestra la distribución de áreas reguladas [cite: 164]
   geom_boxplot(fill = "seagreen", outlier.color = "red") +
   labs(
-    title = "Relación de las acciones gubernamentales entre desarrollo y cantidad de areas",
+    title = "Relación de las acciones gubernamentales entre desarrollo 
+    y cantidad de areas",
     x = "Nivel de desarrollo  (Fuentes secundarias)",
     y = "Cantidad de áreas con acciones gubernamentales"
   ) +
   theme_minimal()
 
 
+datos_limpios %>%
+  ggplot() +
+  aes(x = Actores_no_estatales_secundarias, y = Cant_areas_trabajo_nsa_IA) +
+  # El boxplot muestra la distribución de áreas reguladas [cite: 164]
+  geom_boxplot(fill = "yellow", outlier.color = "red") +
+  labs(
+    title = "Relación de los actores no estatales entre desarrollo 
+    y cantidad de areas",
+    x = "Nivel de desarrollo  (Fuentes secundarias)",
+    y = "Cantidad de áreas con actores no estatales"
+  ) +
+  theme_minimal()
+
+
 ##########################
-# Diagrama de dispersión #
+# Diagrama de dispersión # RELACION ENTRE GIRAI E INDICADORE
 ##########################
 
+#analizamos si existe relacion entre los indicadores de derechos humanos,
+# Gobernanza de la IA, capacidades de la IA y el valor girai.
+
 ggplot(datos_limpios) +
-  aes(x = Marcos_normativos_gob , y = GIRAI) +
+  aes(x = Derechos_humanos , y = GIRAI) +
+  geom_point(color = "steelblue", size = 2) +
+  labs(x = "dimension de la IA y derechos humanos", y = "Puntos GIRAI")+
+  ggtitle("Relacion entre los puntos asignados a IA y DDHH y los puntos GIRAI") +
+  theme_classic()
+
+
+
+ggplot(datos_limpios) +
+  aes(x = Gobernanza_IA , y = GIRAI) +
   geom_point() +
-  labs(x = "Marcos normativos gubernamentales", y = "Puntos GIRAI")+
-  ggtitle("Relacion entre los marcos normativos gubernamentales y los puntos GIRAI") +
+  labs(x = "acciones gubernamentales", y = "Puntos GIRAI")+
+  ggtitle("Relacion entre los puntos asignados a las acciones gubernamentales
+          y los puntos GIRAI") +
+  theme_classic()
+
+
+ggplot(datos_limpios) +
+  aes(x = Capacidades_IA , y = GIRAI) +
+  geom_point(color = "red", size = 2) +
+  labs(x = "capacidades de la IA", y = "Puntos GIRAI")+
+  ggtitle("Relacion entre los puntos asignados a las capacidades de la IA 
+          y los puntos GIRAI") +
   theme_classic()
