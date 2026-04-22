@@ -95,20 +95,36 @@ g1 <- datos_limpios %>% filter(NU_region == "África") %>%
 grid.arrange(g1, g2, g3, g4, g5, # Qué objetos vamos a mostrar
              ncol=5, nrow =1) # Cant de columnas y filas de la grilla
 
-
+##########################
+# BOXPLOT CRUZANDO VARIABLE CATEGORICA CON CUANTITATIVA #
+##########################
 
 
 # boxplot entre la cantidad de areas con marcos normativos y el nivel de desarrollo.
-# Gráfico de relación Categórica vs Cuantitativa (Sin puntos)
+
 datos_limpios %>%
   ggplot() +
   aes(x = Marcos_fuentes_secundarias, y = Cant_areas_reglas_IA) +
   # El boxplot muestra la distribución de áreas reguladas [cite: 164]
   geom_boxplot(fill = "lightblue", outlier.color = "red") +
   labs(
-    title = "Relación entre desarrollo percibido y regulación efectiva",
-    x = "Nivel de desarrollo (Fuentes secundarias)",
+    title = "Relación de los marcos normativos gubernamentales entre desarrollo y cantidad de areas",
+    x = "Nivel de desarrollo  (Fuentes secundarias)",
     y = "Cantidad de áreas con marcos normativos"
+  ) +
+  theme_minimal()
+
+
+
+datos_limpios %>%
+  ggplot() +
+  aes(x = Acciones_fuentes_secundarias, y = Cant_areas_acciones_gob_IA) +
+  # El boxplot muestra la distribución de áreas reguladas [cite: 164]
+  geom_boxplot(fill = "seagreen", outlier.color = "red") +
+  labs(
+    title = "Relación de las acciones gubernamentales entre desarrollo y cantidad de areas",
+    x = "Nivel de desarrollo  (Fuentes secundarias)",
+    y = "Cantidad de áreas con acciones gubernamentales"
   ) +
   theme_minimal()
 
