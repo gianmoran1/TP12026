@@ -15,11 +15,6 @@ attach(datos_limpios)
 
 # Histograma de Frecuencias absolutas del GIRAI--------------------------------
 
-datos_limpios$Marcos_fuentes_secundarias <- factor(
-  datos_limpios$Marcos_fuentes_secundarias,
-  levels = c("Muy bajo", "Bajo", "Medio", "Alto", "Muy alto")
-)
-
 ggplot(datos_limpios) +
   aes(x = GIRAI) +
   geom_histogram(fill = "lightgray", col = "black", 

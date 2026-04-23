@@ -9,24 +9,23 @@ attach(datos)
 
 datos_limpios <- datos %>%
   select(   # Eliminar las columnas que no quiero conservar
-    -ISO3, -Country, -tipo_academia_en, -tipo_privado_en
+    -Ranking, -ISO3, -Country, -Pais, -GIRAI_region, -UN_subregion,
+    -mng, -ag, -ane, -areas_parlam, -areas_concient,
+    -academia, -tipo_academia_en, -tipo_academia_es,
+    -privado, -tipo_privado_en, -tipo_privado_es
   )
 
 colnames(datos_limpios) <- c(
-  "Ranking", "Pais", "GIRAI_region", "NU_region", "NU_subregion", "GIRAI",
-  "Marcos_normativos_gob", "Acciones_gob", "Actores_no_estatales",
-  "Derechos_humanos", "Gobernanza_IA", "Capacidades_IA",
-  "Marcos_fuentes_secundarias", "Acciones_fuentes_secundarias",
-  "Actores_no_estatales_secundarias", "Dimension_mejor_puntuada",
-  "Sesgo_y_discriminacion", "Derechos_infancia",
-  "Diversidad_cultural_y_linguistica", "Proteccion_datos_y_privacidad",
-  "Igualdad_de_genero", "Supervision_humana",
-  "Proteccion_laboral_y_trabajo", "Seguridad_precision_y_fiabilidad",
-  "Transparencia_y_explicabilidad", "Cant_areas_reglas_IA",
-  "Cant_areas_acciones_gob_IA", "Cant_areas_discusiones_IA",
-  "Cant_areas_concientizacion_IA", "Cant_areas_trabajo_nsa_IA",
-  "Hay_academias_trabajando", "Tipo_iniciativa_academia",
-  "Hay_sector_privado_trabajando", "Tipo_iniciativa_sector_privado"
+  "NU_region", "GIRAI", "Derechos_humanos", "Gobernanza_IA",
+  "Capacidades_IA", "Marcos_fuentes_secundarias",
+  "Acciones_fuentes_secundarias", "Actores_no_estatales_secundarias",
+  "Dimension_mejor_puntuada", "Sesgo_y_discriminacion",
+  "Derechos_infancia", "Diversidad_cultural_y_linguistica",
+  "Proteccion_datos_y_privacidad", "Igualdad_de_genero",
+  "Supervision_humana", "Proteccion_laboral_y_trabajo",
+  "Seguridad_precision_y_fiabilidad", "Transparencia_y_explicabilidad",
+  "Cant_areas_reglas_IA", "Cant_areas_acciones_gob_IA",
+  "Cant_areas_trabajo_nsa_IA"
 )
 
 # Creación de variable de respuesta múltiple y limpieza de p70
@@ -46,7 +45,8 @@ datos_limpios <- datos_limpios %>%
         if (Transparencia_y_explicabilidad == 1) "Transparencia"
       )
       if (length(v) == 0) "Ninguna" else paste(v, collapse = ", ")
-    }
+    },
+    .after = Dimension_mejor_puntuada # Acomoda la columna acá
   ) %>%
   ungroup() %>%
   # Elimino las columnas de indicadores p70
