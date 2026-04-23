@@ -9,32 +9,72 @@ library(tidyverse)
 # Fijo el dataset
 attach(datos_limpios)
 
+# Frecuencias
+datos_limpios %>% group_by(Pais) %>%
+  summarize(cant = n())
 
-
-
+## medidas resumen por regiones de la ONU
 datos_limpios %>% group_by(NU_region) %>%
   summarize(GIRAI_media = mean(GIRAI),
             GIRAI_maximo = max(GIRAI),
             GIRAI_minimo = min(GIRAI),
-            GIRAI_ds = sd(GIRAI))
+            GIRAI_ds = sd(GIRAI),
+            mng_media = mean(Marcos_normativos_gob),
+            ag_media = mean(Acciones_gob),
+            ane_media = mean(Actores_no_estatales)
+            )
 
 
 
+## medidas resumen por sub_regiones de la ONU
 datos_limpios %>% group_by(NU_subregion) %>%
   summarize(GIRAI_media = mean(GIRAI),
             GIRAI_maximo = max(GIRAI),
             GIRAI_minimo = min(GIRAI),
-            GIRAI_ds = sd(GIRAI))
-
-datos_limpios %>% group_by(NU_region) %>%
-  summarize(mng_media = mean(Marcos_normativos_gob),
+            GIRAI_ds = sd(GIRAI),
+            mng_media = mean(Marcos_normativos_gob),
             ag_media = mean(Acciones_gob),
             ane_media = mean(Actores_no_estatales))
 
 
-datos_limpios %>% group_by(NU_subregion) %>%
-  summarize(mng_media = mean(Marcos_normativos_gob),
-            ag_media = mean(Acciones_gob),
-            ane_media = mean(Actores_no_estatales))      
+# Variable de respuesta múltiple
+tabla_resumen_multiple <- datos_limpios %>%
+  separate_rows(Areas_p70_multiple, sep = ", ") %>%
+  filter(Areas_p70_multiple != "Ninguna") %>%
+  
+  group_by(Areas_p70_multiple) %>%
+  summarize(
+    Cantidad_Paises = n(),
+    Promedio_GIRAI = mean(GIRAI, na.rm = TRUE) 
+  ) %>%
+  
+  arrange(desc(Cantidad_Paises))
+  print(tabla_resumen_multiple)
 
-#fin cambios teroooo
+
+
+  #########################
+  # Tablas usando janitor #
+  #########################
+  
+  # Tabla de distribución de frecuencias
+  tabla <- tabyl(NU_region)
+  
+  # Adorns
+  tabla %>% 
+    rename(   # Renombro columnas
+      "Region" = NU_region,
+      "Cant de países" = n,
+      " % países" = percent
+    ) %>% 
+    adorn_totals() %>%  # Agrego fila de totales
+    adorn_pct_formatting(digits = 1) # Cant. de decimales en %
+
+  # Tabla de contingencia
+  datos_limpios %>%
+  tabyl(NU_region, Dimension_mejor_puntuada) %>%
+    adorn_totals(where = c("row", "col")) %>%
+    adorn_percentages(denominator = "row") %>% # Distribuciones condicionales
+    adorn_pct_formatting(digits = 1) %>%
+    adorn_title(placement = "combined", row_name = "Región", col_name = "Dimensión mejor puntuada")
+      
