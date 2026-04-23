@@ -139,27 +139,27 @@ y cantidad de áreas",
   theme_minimal()
 
 # Diagrama de dispersión entre los indicadores de derechos humanos, gobernanza 
-# de la IA, capacidades de la IA y el valor GIRAI-------------------------------
+# de la IA, capacidades de la IA------------------------------------------------
 
 ggplot(datos_limpios) +
-  aes(x = Derechos_humanos , y = GIRAI) +
+  aes(x = Derechos_humanos , y = Gobernanza_IA) +
   geom_point(color = "steelblue", size = 2) +
-  labs(x = "Dimension de la IA y derechos humanos", y = "Puntos GIRAI")+
-  ggtitle("Relacion entre los puntos asignados a IA y DDHH y los puntos GIRAI")+
+  labs(x = "DDHH", y = "Gobernanza de IA")+
+  ggtitle("Relacion entre los puntos asignados a DDHH y la gobernanza IA")+
   theme_classic()
 
 ggplot(datos_limpios) +
-  aes(x = Gobernanza_IA , y = GIRAI) +
+  aes(x = Capacidades_IA , y = Derechos_humanos) +
   geom_point() +
-  labs(x = "Acciones gubernamentales", y = "Puntos GIRAI")+
-  ggtitle("Relacion entre los puntos asignados a las acciones gubernamentales
-y los puntos GIRAI") +
+  labs(x = "Capacidades IA", y = "DDHH")+
+  ggtitle("Relacion entre los puntos asignados a la capacidad de IA
+y los DDHH") +
   theme_classic()
 
 ggplot(datos_limpios) +
-  aes(x = Capacidades_IA , y = GIRAI) +
+  aes(x = Gobernanza_IA , y = Capacidades_IA) +
   geom_point(color = "red", size = 2) +
-  labs(x = "Capacidades de la IA", y = "Puntos GIRAI")+
-  ggtitle("Relacion entre los puntos asignados a las capacidades de la IA
-y los puntos GIRAI") +
+  labs(x = "Gobernanza de IA", y = "Capacidades IA")+
+  ggtitle("Relacion entre los puntos asignados a la gobernanza de la IA
+y la capacidad de la IA") +
   theme_classic()
