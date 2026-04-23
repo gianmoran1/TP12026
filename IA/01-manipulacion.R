@@ -10,13 +10,14 @@ attach(datos)
 datos_limpios <- datos %>%
   select(   # Eliminar las columnas que no quiero conservar
     -Ranking, -ISO3, -Country, -GIRAI_region,
-    -mng, -ag, -ane, -areas_parlam, -areas_concient,
+    -areas_parlam, -areas_concient,
     -academia, -tipo_academia_en, -tipo_academia_es,
     -privado, -tipo_privado_en, -tipo_privado_es
   )
 
 colnames(datos_limpios) <- c(
-  "Pais", "NU_region","NU_subregion", "GIRAI", "Derechos_humanos", "Gobernanza_IA",
+  "Pais", "NU_region","NU_subregion", "GIRAI", "Marcos_normativos_gob",
+  "Acciones_gob", "Actores_no_estatales", "Derechos_humanos", "Gobernanza_IA",
   "Capacidades_IA", "Marcos_fuentes_secundarias",
   "Acciones_fuentes_secundarias", "Actores_no_estatales_secundarias",
   "Dimension_mejor_puntuada", "Sesgo_y_discriminacion",
