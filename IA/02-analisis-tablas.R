@@ -11,12 +11,17 @@ library(janitor)
 attach(datos_limpios)
 
 # Frecuencias
-datos_limpios %>% group_by(Pais) %>%
-  summarize(cant = n())
+datos_limpios %>%
+  summarize(GIRAI_media = mean(GIRAI),
+            GIRAI_mediana = median(GIRAI),
+            GIRAI_maximo = max(GIRAI),
+            GIRAI_minimo = min(GIRAI),
+            GIRAI_ds = sd(GIRAI))
 
 ## medidas resumen por regiones de la ONU
 datos_limpios %>% group_by(NU_region) %>%
   summarize(GIRAI_media = mean(GIRAI),
+            GIRAI_mediana = median(GIRAI),
             GIRAI_maximo = max(GIRAI),
             GIRAI_minimo = min(GIRAI),
             GIRAI_ds = sd(GIRAI),
