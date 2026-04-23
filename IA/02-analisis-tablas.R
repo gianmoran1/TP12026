@@ -51,6 +51,23 @@ tabla_resumen_multiple <- datos_limpios %>%
   arrange(desc(Cantidad_Paises))
   print(tabla_resumen_multiple)
 
+  #  Resumen por región para las tres variables de fuentes secundarias
+  
+  niveles_ordenados <- c("Muy bajo", "Bajo", "Medio", "Alto", "Muy alto")
+  tabla_resumen <- datos_limpios %>%
+    group_by(NU_region) %>%
+    summarise(
+      # Mediana de Marcos
+      Mediana_Marcos = niveles_ordenados[round(median(match(Marcos_fuentes_secundarias, niveles_ordenados), na.rm = TRUE))],
+      
+      # Mediana de Acciones
+      Mediana_Acciones = niveles_ordenados[round(median(match(Acciones_fuentes_secundarias, niveles_ordenados), na.rm = TRUE))],
+      
+      # Mediana de Actores No Estatales
+      Mediana_Actores = niveles_ordenados[round(median(match(Actores_no_estatales_secundarias, niveles_ordenados), na.rm = TRUE))]
+    )
+  
+  print(tabla_resumen)
 
 
   #########################
@@ -78,3 +95,7 @@ tabla_resumen_multiple <- datos_limpios %>%
     adorn_pct_formatting(digits = 1) %>%
     adorn_title(placement = "combined", row_name = "Región", col_name = "Dimensión mejor puntuada")
       
+  
+  
+
+    
