@@ -4,6 +4,7 @@
 
 # Cargo los paquetes que voy a usar
 library(tidyverse)
+library(janitor)
 
 
 # Fijo el dataset
