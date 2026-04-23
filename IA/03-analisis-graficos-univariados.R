@@ -13,8 +13,19 @@ library(gridExtra)
 # Fijo el dataset
 attach(datos_limpios)
 
+# Histograma de Frecuencias absolutas del GIRAI--------------------------------
 
+datos_limpios$Marcos_fuentes_secundarias <- factor(
+  datos_limpios$Marcos_fuentes_secundarias,
+  levels = c("Muy bajo", "Bajo", "Medio", "Alto", "Muy alto")
+)
 
+ggplot(datos_limpios) +
+  aes(x = GIRAI) +
+  geom_histogram(fill = "lightgray", col = "black", 
+                 breaks = seq(0, 100, 5)) + # Límites de intervalos
+  scale_x_continuous(breaks = seq(0, 250, 20)) + #Marcas del eje
+  labs(x = "Puntos GIRAI", y = "Cantidad de países")
 
 # Grafico de sectores circulares con las dimensiones mejor puntuadas-----------
 
@@ -33,7 +44,7 @@ datos_limpios %>%
             cex = 3) + 
   scale_fill_brewer(palette="Set1") # Extra: puedo elegir paleta de colores
 
-# Grafico areas con mas de 70 puntos
+# Grafico areas con mas de 70 puntos-------------------------------------------
 
 datos_limpios %>%
   separate_rows(Areas_p70_multiple, sep = ", ") %>%
@@ -49,28 +60,3 @@ datos_limpios %>%
     y = "Cantidad de Países"
   ) +
   theme_minimal()
-
-#-----------------------------------------------------------------------------
-
-# Definir la ordinalidad de la variable de fuentes secundarias [cite: 161]
-datos_limpios$Marcos_fuentes_secundarias <- factor(
-  datos_limpios$Marcos_fuentes_secundarias,
-  levels = c("Muy bajo", "Bajo", "Medio", "Alto", "Muy alto")
-)
-
-
-
-##############
-# Histograma #
-############## 
-
-# histograma de Frecuencias absolutas del GIRAI
-ggplot(datos_limpios) +
-  aes(x = GIRAI) +
-  geom_histogram(fill = "lightgray", col = "black", 
-                 
-                 breaks = seq(0, 100, 5)) + # Límites de intervalos
-  
-  scale_x_continuous(breaks = seq(0, 250, 20)) + #Marcas del eje
-  
-  labs(x = "Puntos GIRAI", y = "Cantidad de países")
