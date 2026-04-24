@@ -14,6 +14,7 @@ library(gridExtra)
 attach(datos_limpios)
 
 # Histograma de Frecuencias absolutas del GIRAI--------------------------------
+# Variable cuantitativa continua
 
 ggplot(datos_limpios) +
   aes(x = GIRAI) +
@@ -23,6 +24,7 @@ ggplot(datos_limpios) +
   labs(x = "Puntos GIRAI", y = "Cantidad de países")
 
 # Grafico de sectores circulares con las dimensiones mejor puntuadas-----------
+# Variable categorica nominal.
 
 datos_limpios %>% 
   tabyl(Dimension_mejor_puntuada) %>% # Primero armo la tabla
@@ -40,6 +42,7 @@ datos_limpios %>%
   scale_fill_brewer(palette="Set1") # Extra: puedo elegir paleta de colores
 
 # Grafico areas con mas de 70 puntos-------------------------------------------
+# Variable categorica de respuesta multiple
 
 datos_limpios %>%
   separate_rows(Areas_p70_multiple, sep = ", ") %>%

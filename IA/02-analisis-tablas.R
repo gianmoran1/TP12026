@@ -6,7 +6,6 @@
 library(tidyverse)
 library(janitor)
 
-
 # Fijo el dataset
 attach(datos_limpios)
 
@@ -18,7 +17,7 @@ datos_limpios %>%
             GIRAI_minimo = min(GIRAI),
             GIRAI_ds = sd(GIRAI))
 
-## medidas resumen por regiones de la ONU
+# Medidas resumen por regiones de la ONU
 datos_limpios %>% group_by(NU_region) %>%
   summarize(GIRAI_media = mean(GIRAI),
             GIRAI_mediana = median(GIRAI),
@@ -30,9 +29,7 @@ datos_limpios %>% group_by(NU_region) %>%
             ane_media = mean(Actores_no_estatales)
             )
 
-
-
-## medidas resumen por sub_regiones de la ONU
+# Medidas resumen por sub_regiones de la ONU
 datos_limpios %>% group_by(NU_subregion) %>%
   summarize(GIRAI_media = mean(GIRAI),
             GIRAI_maximo = max(GIRAI),
@@ -74,16 +71,11 @@ tabla_resumen_multiple <- datos_limpios %>%
     )
   
   print(tabla_resumen)
-
-
-  #########################
-  # Tablas usando janitor #
-  #########################
   
-  # Tabla de distribución de frecuencias
+# Tabla de distribución de frecuencias
   tabla <- tabyl(NU_region)
   
-  # Adorns
+# Adorns
   tabla %>% 
     rename(   # Renombro columnas
       "Region" = NU_region,
@@ -100,8 +92,3 @@ tabla_resumen_multiple <- datos_limpios %>%
     adorn_percentages(denominator = "row") %>% # Distribuciones condicionales
     adorn_pct_formatting(digits = 1) %>%
     adorn_title(placement = "combined", row_name = "Región", col_name = "Dimensión mejor puntuada")
-      
-  
-  
-
-    

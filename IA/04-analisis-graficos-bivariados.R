@@ -14,6 +14,7 @@ library(gridExtra)
 attach(datos_limpios)
 
 # Boxplot GIRAI en regiones----------------------------------------------------
+# Variable cuantitativa continua (GIRAI) y variable categorica (regiones)
 
 # Creamos los gráficos de a uno y los guardamos en objetos (g1, ..., g5)
 g1 <- datos_limpios %>% filter(NU_region == "África") %>%
@@ -65,6 +66,7 @@ grid.arrange(g1, g2, g3, g4, g5, # Qué objetos vamos a mostrar
              ncol=5, nrow =1) # Cant de columnas y filas de la grilla
 
 # Grafico de barras apiladas entre regiones y dimension mejor puntuada---------
+# Variables categoricas
 
 datos_limpios$Dimension_mejor_puntuada <- factor(datos_limpios$Dimension_mejor_puntuada, 
                                                  levels = c("gob", "ddhh", "cap"))
@@ -80,6 +82,8 @@ datos_limpios %>%
 
 # Boxplot cantidad de areas con marcos normativos (discreta) y nivel de 
 # desarrollo segun fuentes secundarias en marcos normativos (ordinal)----------
+# Variable cuantitativa discreta (cantidad de areas) y categorica ordinal
+# (desarrollo segun fuentes secundarias)
 
 datos_limpios$Marcos_fuentes_secundarias <- factor(
   datos_limpios$Marcos_fuentes_secundarias,
@@ -100,6 +104,8 @@ y cantidad de áreas",
 
 # Boxplot cantidad de areas con acciones del gobierno (discreta) y nivel de 
 # desarrollo segun fuentes secundarias en acciones del gobierno (ordinal)-------
+# Variable cuantitativa discreta (cantidad de areas) y categorica ordinal
+# (desarrollo segun fuentes secundarias)
 
 datos_limpios$Acciones_fuentes_secundarias <- factor(
   datos_limpios$Acciones_fuentes_secundarias,
@@ -120,6 +126,8 @@ y cantidad de áreas",
 
 # Boxplot cantidad de areas con actores no estatales (discreta) y nivel de 
 # desarrollo segun fuentes secundarias en actores no estatales (ordinal)-------
+# Variable cuantitativa discreta (cantidad de areas) y categorica ordinal
+# (desarrollo segun fuentes secundarias)
 
 datos_limpios$Actores_no_estatales_secundarias <- factor(
   datos_limpios$Actores_no_estatales_secundarias,
@@ -140,6 +148,7 @@ y cantidad de áreas",
 
 # Diagrama de dispersión entre los indicadores de derechos humanos, gobernanza 
 # de la IA, capacidades de la IA------------------------------------------------
+# Variables cuantitativas continuas.
 
 ggplot(datos_limpios) +
   aes(x = Derechos_humanos , y = Gobernanza_IA) +

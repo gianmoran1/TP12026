@@ -50,6 +50,3 @@ datos_limpios %>% group_by(NU_region) %>%
             Desv.Est. = IQR(GIRAI),
             Mínimo = min(GIRAI),
             Máximo = max(GIRAI))
-           
-
-
